@@ -9,9 +9,9 @@ import java.util.List;
 public interface PostService {
 
       //abstract method
-      List<PostDtoRes> getAllPosts();
-      PostDtoRes getPostById(long id);
-      void addPost(PostDtoReq post);
-      void deletePostById(long id);
+      List<PostDtoRes> findAll();
+      PostDtoRes findById(long id);
+      void save(PostDtoReq post);
+      void deleteById(long id);
       void updatePostById(long id, PostDtoReq post);
 }

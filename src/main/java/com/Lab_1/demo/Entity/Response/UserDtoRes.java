@@ -1,20 +1,20 @@
 package com.Lab_1.demo.Entity.Response;
 
-
+import com.Lab_1.demo.Entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//PostDto class
-public class PostDtoRes {
+public class UserDtoRes {
 
-       private long id;
-       private String title;
-       private String content;
-       private String author;
+    long id;
+    String name;
+    List<Post> posts;
 }

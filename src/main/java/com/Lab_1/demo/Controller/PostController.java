@@ -1,10 +1,10 @@
 package com.Lab_1.demo.Controller;
 
-import com.Lab_1.demo.Entity.Post;
 import com.Lab_1.demo.Entity.Request.PostDtoReq;
 import com.Lab_1.demo.Entity.Response.PostDtoRes;
 import com.Lab_1.demo.Service.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,35 +12,32 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
+@AllArgsConstructor
+@NoArgsConstructor
 public class PostController {
 
         PostService postService;
 
-        @Autowired
-        public PostController(PostService postService) {
-            this.postService = postService;
-        }
-
         @GetMapping
-        public List<PostDtoRes> getAllPosts() {
-             return postService.getAllPosts();
+        public List<PostDtoRes> findAll() {
+             return postService.findAll();
         }
 
         @GetMapping("/{id}")
-        public PostDtoRes getPostById(@PathVariable("id") long id) {
-              return postService.getPostById(id);
+        public PostDtoRes findById(@PathVariable("id") long id) {
+              return postService.findById(id);
         }
 
         @PostMapping
         @ResponseStatus(HttpStatus.CREATED)
-        public void addPost(@RequestBody PostDtoReq post) {
-              postService.addPost(post);
+        public void save(@RequestBody PostDtoReq post) {
+              postService.save(post);
         }
 
         @DeleteMapping("{id}")
         @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void deletePostById(@PathVariable long id) {
-             postService.deletePostById(id);
+        public void deleteById(@PathVariable long id) {
+             postService.deleteById(id);
         }
 
         @PutMapping("{id}")

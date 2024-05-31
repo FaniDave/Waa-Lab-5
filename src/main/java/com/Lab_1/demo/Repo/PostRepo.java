@@ -1,16 +1,11 @@
 package com.Lab_1.demo.Repo;
 
 import com.Lab_1.demo.Entity.Post;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 //PostRepo interface
-public interface PostRepo {
+public interface PostRepo extends JpaRepository<Post, Long> {
 
-      //abstract methods
-      List<Post> getAllPosts();
-      Post getPostById(long id);
-      void addPost(Post post);
-      void deletePostById(long id);
-      void updatePostById(long id, Post post);
 }

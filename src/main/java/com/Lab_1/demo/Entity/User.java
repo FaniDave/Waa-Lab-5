@@ -6,22 +6,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
-public class Post {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    Long id;
     @Column
-    private String title;
-    @Column
-    private String content;
-    @Column
-    private String author;
-
+    String name;
+    @OneToMany
+    @JoinColumn(name="posts")
+    List<Post> posts;
 }
