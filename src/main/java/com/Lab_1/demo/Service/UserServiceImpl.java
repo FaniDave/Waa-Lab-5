@@ -1,5 +1,6 @@
 package com.Lab_1.demo.Service;
 
+import com.Lab_1.demo.Aspect.ExecutionTime;
 import com.Lab_1.demo.Entity.Request.UserDtoReq;
 import com.Lab_1.demo.Entity.Response.PostDtoRes;
 import com.Lab_1.demo.Entity.Response.UserDtoRes;
@@ -30,6 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @ExecutionTime
     public UserDtoRes findUserById(Long id) {
         User user = userRepo.findById(id).orElse(null);
         return modelMapper.map(user, UserDtoRes.class);
