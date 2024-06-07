@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDtoRes {
-       private long id;
-       private String title;
-       private String content;
-       private String author;
+public class CommentDtoRes {
+
+      private Long id;
+      private String name;
+      private String comment;
 }

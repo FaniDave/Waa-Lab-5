@@ -5,9 +5,7 @@ import com.Lab_1.demo.Entity.Response.PostDtoRes;
 import com.Lab_1.demo.Entity.Response.UserDtoRes;
 import com.Lab_1.demo.Service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,17 +13,14 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @RequestMapping("/users")
 public class UserController {
 
-       UserService userService;
-
+       private UserService userService;
 
        @GetMapping
        public List<UserDtoRes> findAllUsers() {
-            return userService.findAllUsers();
+              return userService.findAllUsers();
        }
 
        @GetMapping("/{id}")
@@ -41,5 +36,10 @@ public class UserController {
        @GetMapping("/{id}/posts")
        public List<PostDtoRes> findPostsByUserId(@PathVariable Long id) {
               return userService.findPostsByUserId(id);
+       }
+
+       @GetMapping("/more-than/{n}/posts")
+       public List<UserDtoRes> findUsersWithMoreThanNPosts(@PathVariable int n) {
+              return userService.findUsersWithMoreThanNPosts(n);
        }
 }

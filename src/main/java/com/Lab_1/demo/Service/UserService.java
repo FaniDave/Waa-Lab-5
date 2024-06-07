@@ -11,5 +11,6 @@ public interface UserService {
     List<UserDtoRes> findAllUsers();
     UserDtoRes findUserById(Long id);
     UserDtoRes saveUser(UserDtoReq userDtoReq);
-    List<PostDtoRes> findPostsByUserId( Long id);
+    List<PostDtoRes> findPostsByUserId(Long id);
+    List<UserDtoRes> findUsersWithMoreThanNPosts(int n);
 }

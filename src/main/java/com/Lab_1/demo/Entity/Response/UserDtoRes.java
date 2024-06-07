@@ -13,8 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDtoRes {
-
-    long id;
-    String name;
-    List<Post> posts;
+    private long id;
+    private String name;
+    private List<Post> posts;
 }

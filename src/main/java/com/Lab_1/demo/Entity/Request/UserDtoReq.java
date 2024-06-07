@@ -13,8 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDtoReq {
-
-    String name;
-    List<Post> posts;
-
+    private String name;
+    private List<Post> posts;
 }

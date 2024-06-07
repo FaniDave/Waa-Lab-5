@@ -12,7 +12,6 @@ import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,26 +21,35 @@ import java.util.List;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    ModelMapper modelMapper;
-    UserRepo userRepo;
+    private ModelMapper modelMapper;
+    private UserRepo userRepo;
 
+    @Override
     public List<UserDtoRes> findAllUsers() {
-          return userRepo.findAll().stream().map(user -> modelMapper.map(user, UserDtoRes.class)).toList();
+        return userRepo.findAll().stream().map(user -> modelMapper.map(user, UserDtoRes.class)).toList();
     }
 
+    @Override
     public UserDtoRes findUserById(Long id) {
-         User user = userRepo.findById(id).orElse(null);
-         return modelMapper.map(user, UserDtoRes.class);
+        User user = userRepo.findById(id).orElse(null);
+        return modelMapper.map(user, UserDtoRes.class);
     }
 
+    @Override
     public UserDtoRes saveUser(UserDtoReq userDtoReq) {
-          User userToBeSaved = modelMapper.map(userDtoReq, User.class);
-          userRepo.save(userToBeSaved);
-          return modelMapper.map(userToBeSaved, UserDtoRes.class);
+        User userToBeSaved = modelMapper.map(userDtoReq, User.class);
+        userRepo.save(userToBeSaved);
+        return modelMapper.map(userToBeSaved, UserDtoRes.class);
     }
 
+    @Override
     public List<PostDtoRes> findPostsByUserId(Long id) {
-          User user = userRepo.findById(id).orElse(null);
-          return user.getPosts().stream().map(post -> modelMapper.map(post, PostDtoRes.class)).toList();
+        User user = userRepo.findById(id).orElse(null);
+        return user.getPosts().stream().map(post -> modelMapper.map(post, PostDtoRes.class)).toList();
+    }
+
+    @Override
+    public List<UserDtoRes> findUsersWithMoreThanNPosts(int n) { // Override this method
+        return userRepo.findUsersWithMoreThanNPosts(n).stream().map(user -> modelMapper.map(user, UserDtoRes.class)).toList();
     }
 }

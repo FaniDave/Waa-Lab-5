@@ -1,8 +1,8 @@
 package com.Lab_1.demo.Service;
 
-import com.Lab_1.demo.Entity.Post;
 import com.Lab_1.demo.Entity.Request.PostDtoReq;
 import com.Lab_1.demo.Entity.Response.PostDtoRes;
+import com.Lab_1.demo.Entity.Post;
 import com.Lab_1.demo.Repo.PostRepo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,34 +19,45 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
-        PostRepo postRepo;
-        ModelMapper modelMapper;
+    private PostRepo postRepo;
+    private ModelMapper modelMapper;
 
-        public List<PostDtoRes> findAll() {
-            return postRepo.findAll().stream().map(post -> modelMapper.map(post, PostDtoRes.class)).toList();
-        }
+    @Override
+    public List<PostDtoRes> findAll() {
+        return postRepo.findAll().stream().map(post -> modelMapper.map(post, PostDtoRes.class)).toList();
+    }
 
-        public PostDtoRes findById(long id) {
-            return  modelMapper.map(postRepo.findById(id), PostDtoRes.class);
-        }
+    @Override
+    public PostDtoRes findById(long id) {
+        return modelMapper.map(postRepo.findById(id).orElse(null), PostDtoRes.class);
+    }
 
+    @Override
+    public void save(PostDtoReq post) {
+        Post postEntity = modelMapper.map(post, Post.class);
+        postRepo.save(postEntity);
+    }
 
-        public void save(PostDtoReq post) {
-             Post postEntity = modelMapper.map(post, Post.class);
-             postRepo.save(postEntity);
-        }
+    @Override
+    public void deleteById(long id) {
+        postRepo.deleteById(id);
+    }
 
-        public void deleteById(long id) {
-             postRepo.deleteById(id);
-        }
-
-        public void updatePostById(long id, PostDtoReq postDtoReq) {
-            Post postEntity = postRepo.findById(id).get();
+    @Override
+    public void updatePostById(long id, PostDtoReq postDtoReq) {
+        Post postEntity = postRepo.findById(id).orElse(null);
+        if (postEntity != null) {
             postEntity.setTitle(postDtoReq.getTitle());
             postEntity.setContent(postDtoReq.getContent());
             postEntity.setAuthor(postDtoReq.getAuthor());
             postRepo.save(postEntity);
         }
+    }
+
+    @Override
+    public List<PostDtoRes> findPostsByTitle(String title) {  // Override this method
+        return postRepo.findPostsByTitle(title).stream().map(post -> modelMapper.map(post, PostDtoRes.class)).toList();
+    }
 }

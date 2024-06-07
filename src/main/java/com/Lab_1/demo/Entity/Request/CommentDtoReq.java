@@ -9,8 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDtoReq {
-      private String title;
-      private String content;
-      private String author;
+public class CommentDtoReq {
+    private String name;
 }

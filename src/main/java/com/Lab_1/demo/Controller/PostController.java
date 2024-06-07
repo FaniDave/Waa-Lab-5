@@ -16,33 +16,38 @@ import java.util.List;
 @NoArgsConstructor
 public class PostController {
 
-        PostService postService;
+    private PostService postService;
 
-        @GetMapping
-        public List<PostDtoRes> findAll() {
-             return postService.findAll();
-        }
+    @GetMapping
+    public List<PostDtoRes> findAll() {
+        return postService.findAll();
+    }
 
-        @GetMapping("/{id}")
-        public PostDtoRes findById(@PathVariable("id") long id) {
-              return postService.findById(id);
-        }
+    @GetMapping("/{id}")
+    public PostDtoRes findById(@PathVariable("id") long id) {
+        return postService.findById(id);
+    }
 
-        @PostMapping
-        @ResponseStatus(HttpStatus.CREATED)
-        public void save(@RequestBody PostDtoReq post) {
-              postService.save(post);
-        }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void save(@RequestBody PostDtoReq post) {
+        postService.save(post);
+    }
 
-        @DeleteMapping("{id}")
-        @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void deleteById(@PathVariable long id) {
-             postService.deleteById(id);
-        }
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable long id) {
+        postService.deleteById(id);
+    }
 
-        @PutMapping("{id}")
-        @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void updatePostById(@PathVariable long id, @RequestBody PostDtoReq post) {
-              postService.updatePostById(id, post);
-        }
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updatePostById(@PathVariable long id, @RequestBody PostDtoReq post) {
+        postService.updatePostById(id, post);
+    }
+
+    @GetMapping("/title")
+    public List<PostDtoRes> findPostsByTitle(@RequestParam String title) {
+        return postService.findPostsByTitle(title);
+    }
 }
